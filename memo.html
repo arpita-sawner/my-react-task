@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>React App</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel">
+    const { useState, useEffect, memo } = React;
+
+    const Child = memo(function Child({ name }) {
+      console.log("Child Render:", name);
+      return (
+        <div className="bg-blue-50 border border-blue-200 p-4 rounded-xl mt-4">
+          <h3 className="font-bold text-blue-800">Child Component (React.memo)</h3>
+          <p className="mt-2">Name: <b>{name}</b></p>
+        </div>
+      );
+    });
+
+    function App() {
+      const [seconds, setSeconds] = useState(0);
+      const [count, setCount] = useState(0);
+      const [name, setName] = useState("Siddharth");
+
+      useEffect(() => {
+        const id = setInterval(() => setSeconds(s => s + 1), 1000);
+        return () => clearInterval(id);
+      }, []);
+
+      const format = (s) => {
+        const h = String(Math.floor(s/3600)).padStart(2,'0');
+        const m = String(Math.floor((s%3600)/60)).padStart(2,'0');
+        const sec = String(s%60).padStart(2,'0');
+        return `${h}:${m}:${sec}`;
+      };
+
+      return (
+        <div className="min-h-screen bg-gray-900 flex items-center justify-center p-6">
+          <div className="bg-white p-8 rounded-3xl shadow-xl max-w-md w-full text-center">
+            <h1 className="text-5xl font-black text-blue-600">{format(seconds)}</h1>
+            <p className="text-gray-400 mt-2 text-sm">Timer - Every Second Update</p>
+
+            <div className="mt-6 text-left">
+              <p className="font-bold">Parent Count: {count}</p>
+              <button onClick={() => setCount(count+1)} className="bg-black text-white px-4 py-2 rounded-full mt-2 text-sm">
+                Parent Count Badhao
+              </button>
+              <button onClick={() => setName(n => n==="Siddharth"?"Rahul":"Siddharth")} className="ml-2 bg-blue-600 text-white px-4 py-2 rounded-full text-sm">
+                Name Badlo
+              </button>
+              <Child name={name} />
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<App />);
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task 2 - Custom Colors</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'brand-blue': '#1E40AF',
+            'brand-yellow': '#FBBF24',
+            'brand-bg': '#F3F0FF',
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-brand-bg min-h-screen flex items-center justify-center p-6">
+
+  <div class="bg-white p-8 rounded-2xl shadow-xl max-w-md w-full">
+    <h1 class="text-3xl font-bold text-brand-blue">Custom Palette</h1>
+    <p class="text-gray-600 mt-2">Ye mere banaye hue custom colors hain.</p>
+
+    <div class="mt-6 space-y-3">
+      <div class="flex items-center gap-4">
+        <div class="w-12 h-12 rounded-full bg-brand-blue"></div>
+        <div><p class="font-bold">brand-blue</p><p class="text-sm text-gray-500">#1E40AF</p></div>
+      </div>
+      <div class="flex items-center gap-4">
+        <div class="w-12 h-12 rounded-full bg-brand-yellow"></div>
+        <div><p class="font-bold">brand-yellow</p><p class="text-sm text-gray-500">#FBBF24</p></div>
+      </div>
+      <div class="flex items-center gap-4">
+        <div class="w-12 h-12 rounded-full bg-brand-bg border"></div>
+        <div><p class="font-bold">brand-bg</p><p class="text-sm text-gray-500">#F3F0FF</p></div>
+      </div>
+    </div>
+
+    <button class="mt-8 w-full bg-brand-blue text-white py-3 rounded-full font-bold hover:opacity-90">
+      Button with Brand Blue
+    </button>
+    <button class="mt-3 w-full bg-brand-yellow text-brand-blue py-3 rounded-full font-bold">
+      Button with Brand Yellow
+    </button>
+  </div>
+
+</body>
+</html>

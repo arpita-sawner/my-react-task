@@ -1,24 +1,10 @@
-SystemJS.config({
-  baseURL: 'https://unpkg.com/',
-  defaultExtension: true,
-  packages: {
-    '.': {
-      main: './app.js',
-      defaultExtension: 'js'
-    }
-  },
-  meta: {
-    '*.js': {
-      babelOptions: { react: true }
-    }
-  },
+System.config({
+  transpiler: "plugin-babel",
   map: {
-    'plugin-babel':          'systemjs-plugin-babel@latest/plugin-babel.js',
-    'systemjs-babel-build':  'systemjs-plugin-babel@latest/systemjs-babel-browser.js',
-    'react':                 'react@18.3.1/umd/react.development.js',
-    'react-dom':             'react-dom@18.3.1/umd/react-dom.development.js'
-  },
-  transpiler: 'plugin-babel'
+    "plugin-babel": "https://unpkg.com/systemjs-plugin-babel@0.0.25/plugin-babel.js",
+    "systemjs-babel-build": "https://unpkg.com/systemjs-plugin-babel@0.0.25/systemjs-babel-browser.js",
+    "react": "https://unpkg.com/react@18/umd/react.development.js",
+    "react-dom": "https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+  }
 });
-
-SystemJS.import('./app').catch(console.error.bind(console));
+System.import("./app.js");

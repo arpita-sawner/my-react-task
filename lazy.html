@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lazy</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel">
+    const { useState, Suspense } = React;
+
+    const About = React.lazy(() => 
+      Promise.resolve({
+        default: () => (
+          <div className="bg-green-100 p-6 rounded-2xl mt-4 border">
+            <h2 className="text-xl font-bold">About Page</h2>
+            <p>Ye lazy load hua hai!</p>
+          </div>
+        )
+      })
+    );
+
+    function App() {
+      const [show, setShow] = useState(false);
+      
+      return (
+        <div className="min-h-screen bg-black flex items-center justify-center p-4">
+          <div className="bg-white p-6 rounded-2xl w-full max-w-sm">
+            <h1 className="text-2xl font-black">Home Page</h1>
+            <button 
+              onClick={() => setShow(!show)} 
+              className="bg-blue-600 text-white w-full py-3 rounded-full mt-4 font-bold"
+            >
+              {show ? "Hide About" : "Load About (Lazy)"}
+            </button>
+
+            {show && (
+              <Suspense fallback={<div className="mt-4 text-center font-bold">Loading... ⏳</div>}>
+                <About />
+              </Suspense>
+            )}
+          </div>
+        </div>
+      );
+    }
+
+    const root = ReactDOM.createRoot(document.getElementById("root"));
+    root.render(<App />);
+  </script>
+</body>
+</html>
